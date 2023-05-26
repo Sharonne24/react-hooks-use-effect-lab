@@ -18,15 +18,19 @@ function App() {
       setScore((score) => score + 1);
     }
   }
+  function updateQuestions(newQuestions) {
+    setQuestions(newQuestions);
+  }
 
   return (
     <main>
-      <section>
-        {currentQuestion ? (
-          <Question
-            question={currentQuestion}
-            onAnswered={handleQuestionAnswered}
-          />
+    <section>
+      {currentQuestion ? (
+        <Question
+          question={currentQuestion}
+          onAnswered={handleQuestionAnswered}
+          updateQuestions={updateQuestions}
+        />
         ) : (
           <>
             <h1>Game Over</h1>

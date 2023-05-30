@@ -6,21 +6,16 @@ function Question({ question, onAnswered }) {
   // add useEffect code
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeRemaining((prevTime) => {
-        const newTime = prevTime - 1;
-        if (newTime === 0) {
-          onAnswered(false);
-          return 10;
-        }
-        return newTime;
-      });
+      setTimeRemaining(prevTime => prevTime - 1);
     }, 1000);
-  
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [onAnswered]);
-  
+
+    if (timeRemaining === 0) {
+      setTimeRemaining(10);
+      onAnswered(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [timeRemaining, onAnswered]);
   
   function handleAnswer(isCorrect) {
     setTimeRemaining(10);
